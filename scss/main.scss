@@ -130,10 +130,15 @@ h2 {
             font-size: 12px;
             vertical-align: 3px;
             margin-left: 20px;
+            display: none;
 
             &:hover {
                 text-decoration: none;
             }
+        }
+
+        .line-active {
+            display: inline-block;
         }
 
         .arrow-right {
@@ -206,9 +211,8 @@ h2 {
         width: 25px;
         height: 25px;
         position: absolute;
-        top: -21px;
-        right: 0;
-        background: #1f617a;
+        top: -16px;
+        right: 6px;
         padding-left: 4px;
 
         .arrow-down {
@@ -221,19 +225,24 @@ h2 {
         }
     }
 
+    .tab-active {
+        background: #1f617a;
+    }
+
     .banner {
         background: #1f617a;
         margin-bottom: 6px;
         border-radius: 6px;
         padding: 13px 174px 16px 43px;
         position: relative;
+        display: none;
 
         .nav-3 {
             position: absolute;
             right: 205px;
             top: 15px;
 
-            button {
+            .button {
                 width: 25px;
                 height: 25px;
                 border-radius: 4px;
@@ -247,17 +256,30 @@ h2 {
 
                 &:hover {
                     background: #043a4f;
+                    cursor: pointer;
                 }
+            }
+
+            .button-active {
+                background: #043a4f;
             }
         }
 
-        p {
-            margin-bottom: 16px;
-            color: #f1edf4;
-            font: 14px Tahoma;
+        .text {
+            display: none;
+
+            p {
+                margin-bottom: 16px;
+                color: #f1edf4;
+                font: 14px Tahoma;
+            }
         }
 
-        .button {
+        .text-active {
+            display: block;
+        }
+
+        .arrow {
             width: 25px;
             height: 25px;
             background: #218fbb;
@@ -269,7 +291,7 @@ h2 {
             }
         }
 
-        .back {
+        .arrow-back {
             bottom: 33px;
             left: 5px;
 
@@ -284,7 +306,7 @@ h2 {
 
         }
 
-        .forward {
+        .arrow-forward {
             bottom: 33px;
             right: 5px;
 
@@ -298,6 +320,10 @@ h2 {
             }
 
         }
+    }
+
+    .banner-active {
+        display: block;
     }
 
     .article {
