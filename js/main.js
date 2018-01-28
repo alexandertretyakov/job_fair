@@ -78,7 +78,7 @@ window.addEventListener('load', function() {
         arrowNextTextSlide(-1);
     });
 
-//-----------------------------------------------------------------------------click on numeral
+//----------------------------------------------------------------------------click on numeral
     var clickOnNumeral = function(increment) {
         var $array = document.querySelectorAll('.button');
         var $currentSlide = document.querySelector('.button-active');
