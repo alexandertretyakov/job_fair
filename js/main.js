@@ -1,94 +1,95 @@
+var indexOf = function(a, b) {
+    var i = 0;
+    while ( i < a.length ) {
+        if ( a[i] === b ) {
+            return i;
+        }
+        i = i + 1;
+    }
+    return -1;
+};
+
 window.addEventListener('load', function() {
-    var indexOf = function(a, b) {
+
+    // News
+    var selectNextNews = function(increment) {
+        var $array = document.querySelectorAll('.news .item');
+        var $currentSlide = document.querySelector('.news .item.active');
+        var currentIndex = indexOf($array, $currentSlide);
+        var nextIndex = currentIndex + increment;
+
+        if (nextIndex > $array.length - 1) {
+            nextIndex = 0;
+        } else if (nextIndex < 0) {
+            nextIndex = $array.length - 1;
+        }
+
+        $currentSlide.classList.remove('active');
+        $array[nextIndex].classList.add('active');
+    };
+
+    document.querySelector('.news .next').addEventListener('click', function() {
+        selectNextNews(1);
+    });
+
+    document.querySelector('.news .previous').addEventListener('click', function() {
+        selectNextNews(-1);
+    });
+
+    // Banner
+    var removeActiveClass = function() {
+        var $buttons = document.querySelectorAll('.banner-buttons button');
+        var $banners = document.querySelectorAll('.banner-content');
+
         var i = 0;
-        while ( i < a.length ) {
-            if ( a[i] === b ) {
-                return i;
-            }
-            i = i + 1;
+        while (i < $buttons.length) {
+            $buttons[i].classList.remove('active');
+            $banners[i].classList.remove('active');
+            i++;
         }
-        return -1;
     };
 
-//-----------------------------------------------------------------------------selectNextSlide
-    var selectNextSlide = function(increment) {
-        var $array = document.querySelectorAll('.line');
-        var $currentSlide = document.querySelector('.line-active');
-        var currentIndex = indexOf($array, $currentSlide);
+    var selectNextBanner = function(increment) {
+        var $buttons = document.querySelectorAll('.banner-buttons button');
+        var $banners = document.querySelectorAll('.banner-content');
+        var $currentBanner = document.querySelector('.banner-content.active');
+        var currentIndex = indexOf($banners, $currentBanner);
         var nextIndex = currentIndex + increment;
 
-        if (nextIndex > $array.length - 1) {
+        if (nextIndex > $banners.length - 1) {
             nextIndex = 0;
         } else if (nextIndex < 0) {
-            nextIndex = $array.length - 1;
+            nextIndex = $banners.length - 1;
         }
 
-        $currentSlide.classList.remove('line-active');
-        $array[nextIndex].classList.add('line-active');
+        removeActiveClass();
+
+        $banners[nextIndex].classList.add('active');
+        $buttons[nextIndex].classList.add('active');
     };
 
-    document.querySelector('.arrow-right').addEventListener('click', function() {
-        selectNextSlide(1);
+    // Banner Next Button
+    document.querySelector('.banner .next').addEventListener('click', function() {
+        selectNextBanner(1);
     });
 
-    document.querySelector('.arrow-left').addEventListener('click', function() {
-        selectNextSlide(-1);
+    // Banner Previous Button
+    document.querySelector('.banner .previous').addEventListener('click', function() {
+        selectNextBanner(-1);
     });
 
-//-----------------------------------------------------------------------------arrowNextTextSlide
-    var arrowNextTextSlide = function(increment) {
-        var $array = document.querySelectorAll('.text');
-        var $currentSlide = document.querySelector('.text-active');
-        var currentIndex = indexOf($array, $currentSlide);
-        var nextIndex = currentIndex + increment;
+    // Banner toggle
+    document.querySelector('.banner-toggle').addEventListener('click', function() {
+        document.querySelector('.banner-toggle').classList.toggle('active');
+        document.querySelector('.banner').classList.toggle('active');
+    });
 
-        if (nextIndex > $array.length - 1) {
-            nextIndex = 0;
-        } else if (nextIndex < 0) {
-            nextIndex = $array.length - 1;
+    // Banner buttons
+    document.querySelector('.banner-buttons').addEventListener('click', function (event) {
+        if (event.target.tagName === 'BUTTON') {
+            removeActiveClass();
+            event.target.classList.add('active');
+            document.querySelectorAll('.banner-content')[+event.target.innerText-1].classList.add('active');
         }
-
-        $currentSlide.classList.remove('text-active');
-        $array[nextIndex].classList.add('text-active');
-    };
-
-    var arrowNextSlide = function(increment) {
-        var $array = document.querySelectorAll('.button');
-        var $currentSlide = document.querySelector('.button-active');
-        var currentIndex = indexOf($array, $currentSlide);
-        var nextIndex = currentIndex + increment;
-
-        if (nextIndex > $array.length - 1) {
-            nextIndex = 0;
-        } else if (nextIndex < 0) {
-            nextIndex = $array.length - 1;
-        }
-
-        $currentSlide.classList.remove('button-active');
-        $array[nextIndex].classList.add('button-active');
-    };
-
-    document.querySelector('.arrow-forward').addEventListener('click', function() {
-        arrowNextSlide(1);
-        arrowNextTextSlide(1);
-    });
-
-    document.querySelector('.arrow-back').addEventListener('click', function() {
-        arrowNextSlide(-1);
-        arrowNextTextSlide(-1);
-    });
-
-//----------------------------------------------------------------------------click on numeral
-    var clickOnNumeral = function(increment) {
-        var $array = document.querySelectorAll('.button');
-        var $currentSlide = document.querySelector('.button-active');
-
-        $currentSlide.classList.remove('button-active');
-        $array[nextIndex].classList.add('button-active');
-    };
-//-----------------------------------------------------------------------------arrow-down
-    document.querySelector('.arrow-down').addEventListener('click', function() {
-        document.querySelector('.banner').classList.toggle('banner-active');
-        document.querySelector('.tab').classList.toggle('tab-active');
     });
 });
